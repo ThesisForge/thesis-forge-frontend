@@ -1,15 +1,11 @@
 import { createContext, useContext, useState, type ReactNode } from "react"
+import { useNavigate } from "react-router-dom"
 
-interface User {
-  id: string
-  name: string
-  email: string
-  image?: string
-}
+import { User } from "@/lib/types"
 
 interface AuthContextType {
   user: User | null
-  login: () => void
+  login: (user: User, token: string) => void
   logout: () => void
 }
 
@@ -17,14 +13,12 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const navigate = useNavigate()
 
-  const login = () => {
-    setUser({
-      id: "1",
-      name: "Demo User",
-      email: "demo@example.com",
-      image: "/placeholder.svg?height=40&width=40",
-    })
+  const login = (user: User, token: string) => {
+    setUser(user);
+    localStorage.setItem("token", token);
+    navigate("/")
   }
 
   const logout = () => {

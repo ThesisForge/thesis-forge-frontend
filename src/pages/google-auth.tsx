@@ -1,22 +1,23 @@
-import { CircleUserRound } from "lucide-react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { CircleUserRound } from "lucide-react";
+
+import { fetchUser } from "@/api/user";
+import { useAuth } from "@/context/auth-provider";
 
 function GoogleCallback() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get("token");
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const token = searchParams.get("token");
-
-    if (token) {
-      localStorage.setItem("token", token);
-      navigate("/");
-    } else {
-      console.error("No token received from Google.");
-      navigate("/");
-    }
+    if (!token) return;
+    (async () => {
+      const user = await fetchUser(token);
+      login(user, token);
+    })();
   }, [location, navigate]);
 
   return (

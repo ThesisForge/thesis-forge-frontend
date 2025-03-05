@@ -39,7 +39,7 @@ export default function Header() {
           <ModeToggle />
           {user ? (
             <div className="flex items-center gap-4">
-              <span className="text-sm">Hello, {user.name}</span>
+              <span className="text-sm">Hello, {user.first_name}</span>
               <Button variant="outline" onClick={logout}>
                 Logout
               </Button>
