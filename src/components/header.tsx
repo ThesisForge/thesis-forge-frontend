@@ -4,9 +4,19 @@ import { BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { useAuth } from "@/context/auth-provider"
+import { getAuthorizationUrl } from "@/api/google-auth"
 
 export default function Header() {
-  const { user, login, logout } = useAuth()
+  const { user, logout } = useAuth()
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const authUrl = await getAuthorizationUrl();
+      window.location.href = authUrl;
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
+  }
 
   return (
     <header className="border-b">
@@ -35,7 +45,7 @@ export default function Header() {
               </Button>
             </div>
           ) : (
-            <Button onClick={login}>Sign in with Google</Button>
+            <Button onClick={handleGoogleSignIn}>Sign in with Google</Button>
           )}
         </div>
       </div>

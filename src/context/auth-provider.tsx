@@ -18,7 +18,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
-  // Mock login function - in a real app, this would use Google Auth
   const login = () => {
     setUser({
       id: "1",
