@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="border-b">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <BookOpen className="h-6 w-6" />
           <Link to="/" className="text-xl font-bold">
