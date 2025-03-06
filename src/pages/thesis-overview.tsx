@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/use-toast";
 import type { Thesis } from "@/lib/types";
-import { fetchUserThesis } from "@/api/thesis";
+import { fetchUserTheses } from "@/api/thesis";
 
 export default function ThesisOverviewPage() {
   const [theses, setTheses] = useState<Thesis[]>([]);
@@ -40,7 +40,7 @@ export default function ThesisOverviewPage() {
       try {
         const token = localStorage.getItem("token");
         if (!token) return;
-        const data = await fetchUserThesis(token);
+        const data = await fetchUserTheses(token);
         setTheses(data);
       } catch (error) {
         console.error("Error loading thesis data:", error);
@@ -108,7 +108,7 @@ export default function ThesisOverviewPage() {
 
   if (loading) {
     return (
-      <div className="container py-10">
+      <div className="container mx-auto py-10">
         <div className="flex justify-center items-center h-64">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -120,7 +120,7 @@ export default function ThesisOverviewPage() {
   }
 
   return (
-    <div className="container py-10">
+    <div className="container mx-auto py-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Thesis Overview</h1>
         <Button asChild>

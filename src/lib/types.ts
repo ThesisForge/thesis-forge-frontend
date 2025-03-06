@@ -14,17 +14,17 @@ export interface Thesis {
   export interface ThesisFormData {
     topicName: string
     mainArea: string
-    secondaryArea: string
+    secondaryArea?: string
     personalInterest: number
     businessPotential: number
     openSourceContribution: number
     scientificValue: number
     topicDescription: string
-    externalLinks: string
+    externalLinks?: string
   }
   
   export type User = {
-    id: string
+    _id: string
     first_name: string
     last_name: string
     email: string
