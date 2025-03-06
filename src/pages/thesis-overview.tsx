@@ -59,7 +59,7 @@ export default function ThesisOverviewPage() {
 
   const handleDelete = (id: string) => {
     if (confirm("Are you sure you want to delete this thesis?")) {
-      setTheses(theses.filter((thesis) => thesis.id !== id));
+      setTheses(theses.filter((thesis) => thesis._id !== id));
       toast({
         title: "Thesis deleted",
         description: "The thesis has been successfully deleted.",
@@ -153,9 +153,9 @@ export default function ThesisOverviewPage() {
                 </TableCell>
               </TableRow>
             ) : (
-              theses.map((thesis) => (
-                <TableRow key={thesis.id}>
-                  <TableCell>{thesis.id}</TableCell>
+              theses.map((thesis, index) => (
+                <TableRow key={thesis._id}>
+                  <TableCell>{index + 1}</TableCell>
                   <TableCell className="font-medium">
                     {thesis.topicName}
                   </TableCell>
@@ -178,7 +178,7 @@ export default function ThesisOverviewPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => navigate(`/thesis/edit/${thesis.id}`)}
+                        onClick={() => navigate(`/thesis/edit/${thesis._id}`)}
                       >
                         <Pencil className="h-4 w-4" />
                         <span className="sr-only">Edit</span>
@@ -186,7 +186,7 @@ export default function ThesisOverviewPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => handleDelete(thesis.id)}
+                        onClick={() => handleDelete(thesis._id)}
                       >
                         <Trash2 className="h-4 w-4" />
                         <span className="sr-only">Delete</span>
@@ -194,7 +194,7 @@ export default function ThesisOverviewPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => handleInvite(thesis.id)}
+                        onClick={() => handleInvite(thesis._id)}
                       >
                         <Send className="h-4 w-4" />
                         <span className="sr-only">Invite</span>

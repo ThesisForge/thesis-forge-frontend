@@ -147,7 +147,7 @@ export default function ThesisFormPage() {
 
     try {
       const newThesis = await postThesis(values, token, user._id);
-      if (!newThesis.id) {
+      if (!newThesis._id) {
         toast({
           title: "Error",
           description: "Creation of thesis not succesfull!",

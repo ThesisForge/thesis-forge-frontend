@@ -1,5 +1,5 @@
 export interface Thesis {
-    id: string
+    _id: string
     topicName: string
     mainArea: string
     secondaryArea: string
